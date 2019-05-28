@@ -64,5 +64,5 @@ elif [[ "$#" -eq 1 ]]; then                                  # If there are para
   fi
 elif [[ "$#" -ge 2 ]]; then
   echo Wrong input. It should be:
-  echo logs_cleaner.sh \(date in YYYY.MM.DD format / amount of days to delete\)
+  echo logs_cleaner.sh \[date in YYYY.MM.DD format / amount of days to delete\]\(optional\)
 fi
