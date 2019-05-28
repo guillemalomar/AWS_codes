@@ -1,6 +1,6 @@
-# AWS scripts
+# AWS codes
 
-*    Title: AWS_scripts
+*    Title: AWS_codes
 *    Author: Guillem Nicolau Alomar Sitjes      
 *    Current release: May 28th, 2019                  
 *    Code version: 0.1              
