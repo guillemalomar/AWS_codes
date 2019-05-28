@@ -11,13 +11,13 @@ CURR_DATE=$(date +'%Y.%m.%d')
 delete_date_range () {
   DAYS=`expr ${DAYS_TO_DELETE} + ${LIMIT_DAYS}`
   for (( i=FIRST_DAY; i<=$DAYS; i++ )); do
-    DATE_TO_DEL=$(date -j -v-"$i"d -f "%Y.%m.%d" ${CURR_DATE} "+%Y.%m.%d")
+    DATE_TO_DELETE=$(date -j -v-"$i"d -f "%Y.%m.%d" ${CURR_DATE} "+%Y.%m.%d")
     delete_file
   done
 }
 
 past_date () {
-  if [[ ${DATE_TO_DEL} > ${CURR_DATE} ]]; then
+  if [[ ${DATE_TO_DELETE} > ${CURR_DATE} ]]; then
     echo false
   else
     echo true
@@ -27,7 +27,7 @@ past_date () {
 old_enough () {
   for (( i=0; i<=$LIMIT_DAYS; i++ )); do
     PREV_DATE=$(date -j -v-"$i"d -f "%Y.%m.%d" ${CURR_DATE} "+%Y.%m.%d")
-    if [[ "${DATE_TO_DEL}" = "${PREV_DATE}" ]]; then
+    if [[ "${DATE_TO_DELETE}" = "${PREV_DATE}" ]]; then
       echo false
       return
     fi
@@ -36,8 +36,8 @@ old_enough () {
 }
 
 delete_file () {
-  echo Deleting file ${DATE_TO_DEL}
-  curl -X DELETE "$ENDPOINT""$DATE_TO_DEL"
+  echo Deleting file ${DATE_TO_DELETE}
+  curl -X DELETE "$ENDPOINT""$DATE_TO_DELETE"
   echo '\n'
 }
 
@@ -49,7 +49,7 @@ elif [[ "$#" -eq 1 ]]; then                                  # If there are para
     DAYS_TO_DELETE=$1
     delete_date_range
   else                                                       # If the parameter is a string
-    DATE_TO_DEL=$1
+    DATE_TO_DELETE=$1
     IS_PAST_DATE="$(past_date)"
     if [[ ${IS_PAST_DATE} = "false" ]]; then
       echo The provided day is from the future.
